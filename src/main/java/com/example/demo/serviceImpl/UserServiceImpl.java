@@ -18,6 +18,6 @@ public class UserServiceImpl implements UserService {
     };
 
     public List<User> showUserList(){
-        return  showUserList();
+        return  userDao.showUserList();
     }
 }

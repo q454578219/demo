@@ -11,11 +11,14 @@
         <result property="account" column="account" />
         <result property="name" column="name" />
         <result property="password" column="password" />
+        <result property="age" column="age" />
+        <result property="create_time" column="create_time" />
+        <result property="status" column="status" />
     </resultMap>
 
     <insert id="insertUser" >
-        INSERT INTO USER(name, account,password)
-        VALUES (#{user.name}, #{user.account},#{user.password})
+        INSERT INTO USER(name, account,password,age)
+        VALUES (#{user.name}, #{user.account},#{user.password},#{user.age})
     </insert>
 
     <select id="findByName" resultMap="UserResultMap">
