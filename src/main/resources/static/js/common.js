@@ -1,13 +1,45 @@
-var basePath = getRealPath() + '/';
-
-function getAjaxData(url, showData) {
-    ajaxdata = null;
+document.write("<script type=\"text/javascript\" src=\"js/jquery-3.3.1.js\"></script>");
+var columNameList=[];
+var columChinaNameList=[];
+function InitTableColums(url,data){
+    for(var i=0;i<data.length;i++){
+        for(var key in data[i]){
+            var o = new Object();
+            o.data  = key;
+            columNameList.push(o);
+            o = new Object();
+            o.data = data[i][key];
+            columChinaNameList.push(o);
+        }
+    }
+    console.log(getRealPath()+url);
+    $('#example').dataTable({
+        ajax:getRealPath()+url,
+        ordering: false, // 禁止排序
+        searching: true,     // 搜索框
+        bLengthChange: false, //显示每页大小的下拉框（显示一个每页长度的选择条（需要分页器支持））
+        bServerSide:true,//后端分页开启
+        fnHeaderCallback: function (nHead, aData, iStart, iEnd, aiDisplay) {
+            var tablehead;
+            for(var i=0;i<columChinaNameList.length;i++){
+                tablehead+="<th>"+columChinaNameList[i].data+"</th>";
+            }
+            $("#example tr:first").html(tablehead);
+        },
+        columns:columNameList
+    });
+    $("#example tr:eq(1)").remove();
+    $('#example_info').addClass('ml6');
+    $(".dataTables_paginate").css('margin','0 4% 0 0');
+    $('#example_filter').css('margin','20px 5%');
+}
+function getAjaxData(url) {
     $.ajax({
-        url: url,
+        url: getRealPath()+url,
         type: "POST",
         dataType: "json", // 指定服务器返回的数据类型
         success: function (data) {
-            showData(data)
+            return data;
         }, error: function () {
             alert('error');
         }
@@ -38,26 +70,9 @@ function getRealPath() {
 
     var realPath = localhostPaht + projectName;
 
-    return (realPath);
+    return (realPath)+'/';
 
 }
-
-function makeTd(ob, columList) {
-    var html = '';
-    columList = columList.split(',');
-    for (var i = 0; i < columList.length; i++) {
-        if (columList[i].indexOf("time") == -1 && columList[i].indexOf("status") == -1) {
-            html += '<td>' + ob[columList[i]] + '</td>';
-        } else if (columList[i].indexOf("time") != -1) {
-            html += '<td>' + timestampToStr(ob[columList[i]].time) + '</td>';
-        } else if (columList[i].indexOf("status") != -1) {
-            var statusname = ob[columList[i]]==1?'已启用':'已禁用';
-            html += '<td class="td-status"><span class="layui-btn layui-btn-normal layui-btn-mini">'+statusname+'</span></td>';
-        }
-    }
-    return html;
-}
-
 function timestampToStr(timestamp) {
     var d = new Date(timestamp);    //根据时间戳生成的时间对象
     var date = (d.getFullYear()) + "-" +

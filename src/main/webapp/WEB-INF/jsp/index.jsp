@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/xadmin.css">
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/xadmin.js"></script>
 
@@ -67,7 +67,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="member_list">
+                        <a _href="user_list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>会员列表</cite>
 
@@ -276,7 +276,7 @@
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='./welcome' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='./welcome' frameborder="0" scrolling="no" class="x-iframe"></iframe>
             </div>
         </div>
     </div>

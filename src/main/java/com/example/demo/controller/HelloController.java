@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.model.PageData;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,28 +33,21 @@ public class HelloController {
         return "welcome";
     }
 
-    @RequestMapping("/member_list")
-    public String member_list() {
-        return "member/member_list";
+    @RequestMapping("/user_list")
+    public String user_list() {
+        return "user/user_list";
     }
 
-    @RequestMapping("/showMemberList")
+    @RequestMapping("/showUserList")
     @ResponseBody
-    public String showMemberList() {
+    public String showUserList() {
         List<User> userList =  userService.showUserList();
-        System.out.println(JSONArray.fromObject(userList).toString());
-        return JSONArray.fromObject(userList).toString();
-    }
-
-
-    @RequestMapping("/member_edit")
-    public String member_edit() {
-        return "member/member_edit";
-    }
-
-    @RequestMapping("/member_password")
-    public String member_password() {
-        return "member/member_password";
+        PageData pd = new PageData();
+        pd.setData(userList);
+        pd.setiTotalDisplayRecords(10);
+        pd.setiTotalRecords(100);
+        System.out.println(JSONObject.fromObject(pd).toString());
+        return JSONObject.fromObject(pd).toString();
     }
 
     @RequestMapping("/add")

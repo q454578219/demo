@@ -12,7 +12,7 @@ $(function () {
           //新增一个Tab项
           element.tabAdd('xbs_tab', {
             title: title 
-            ,content: '<iframe tab-id="'+id+'" frameborder="0" src="'+url+'" scrolling="yes" class="x-iframe"></iframe>'
+            ,content: '<iframe tab-id="'+id+'" frameborder="0" src="'+url+'" scrolling="no" class="x-iframe"></iframe>'
             ,id: id
           })
         }
