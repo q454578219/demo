@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.ModuleMapper" >
+    <resultMap id="BaseResultMap" type="com.example.demo.model.Module" >
+        <constructor >
+            <idArg column="mid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="mname" jdbcType="VARCHAR" javaType="java.lang.String" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List" >
+    mid, mname
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from module
+        where mid = #{mid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from module
+    where mid = #{mid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.example.demo.model.Module" >
+    insert into module (mid, mname)
+    values (#{mid,jdbcType=INTEGER}, #{mname,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.demo.model.Module" >
+        insert into module
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="mid != null" >
+                mid,
+            </if>
+            <if test="mname != null" >
+                mname,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="mid != null" >
+                #{mid,jdbcType=INTEGER},
+            </if>
+            <if test="mname != null" >
+                #{mname,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Module" >
+        update module
+        <set >
+            <if test="mname != null" >
+                mname = #{mname,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where mid = #{mid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Module" >
+    update module
+    set mname = #{mname,jdbcType=VARCHAR}
+    where mid = #{mid,jdbcType=INTEGER}
+  </update>
+</mapper>

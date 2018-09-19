@@ -1,50 +1,43 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+//用户
+public class User implements Serializable{
+    private Integer uid;
 
-import java.util.Date;
+    private String username;
 
-public class User {
-
-    private Integer id;
-    private String account;
-    private String name;
     private String password;
-    private Integer age;
-    private Date create_time;
-    private Integer status;
 
-    public Integer getAge() {
-        return age;
+    private Set<Role> roles = new HashSet<>();
+
+
+    public User(Integer uid, String username, String password) {
+        this.uid = uid;
+        this.username = username;
+        this.password = password;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public User() {
+        super();
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
-    public String getAccount() {
-        return account;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -55,19 +48,11 @@ public class User {
         this.password = password;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

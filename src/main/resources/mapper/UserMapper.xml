@@ -1,32 +1,93 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.dao.UserDao">
-    <!--目的：为Dao接口方法提供SQL语句-->
-
-    <!--映射实体对象-->
-    <resultMap id="UserResultMap" type="com.example.demo.model.User">
-        <id property="id" column="id" />
-        <result property="account" column="account" />
-        <result property="name" column="name" />
-        <result property="password" column="password" />
-        <result property="age" column="age" />
-        <result property="create_time" column="create_time" />
-        <result property="status" column="status" />
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.UserDao" >
+    <resultMap id="BaseResultMap" type="com.example.demo.model.User" >
+        <constructor >
+            <idArg column="uid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
+        </constructor>
     </resultMap>
-
-    <insert id="insertUser" >
-        INSERT INTO USER(name, account,password,age)
-        VALUES (#{user.name}, #{user.account},#{user.password},#{user.age})
+    <resultMap type="com.example.demo.model.User" id="userMap">
+        <id property="uid" column="uid"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <collection property="roles" ofType="com.example.demo.model.Role">
+            <id property="rid" column="rid"/>
+            <result property="rname" column="rname"/>
+            <collection property="modules" ofType="com.example.demo.model.Module">
+                <id property="mid" column="mid"/>
+                <result property="mname" column="mname"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List" >
+    uid, username, password
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from user
+        where uid = #{uid,jdbcType=INTEGER}
+    </select>
+    <select id="queryUserName" parameterType="string" resultMap="userMap">
+        SELECT u.*,r.*,m.* FROM user u inner join user_role ur on ur.uid=u.uid
+        inner join role r on r.rid=ur.rid
+        inner join module_role mr on mr.rid=r.rid
+        inner join module m on mr.mid=m.mid
+        WHERE username=#{username};
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where uid = #{uid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.example.demo.model.User" >
+    insert into user (uid, username, password
+      )
+    values (#{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.demo.model.User" >
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="uid != null" >
+                uid,
+            </if>
+            <if test="username != null" >
+                username,
+            </if>
+            <if test="password != null" >
+                password,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="uid != null" >
+                #{uid,jdbcType=INTEGER},
+            </if>
+            <if test="username != null" >
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+        </trim>
     </insert>
-
-    <select id="findByName" resultMap="UserResultMap">
-        SELECT * FROM USER WHERE name = #{name}
-    </select>
-
-    <select id="showUserList" resultMap="UserResultMap">
-        SELECT * FROM USER
-    </select>
-
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.User" >
+        update user
+        <set >
+            <if test="username != null" >
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where uid = #{uid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.example.demo.model.User" >
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
 </mapper>
