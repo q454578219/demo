@@ -41,7 +41,7 @@
 <!--初始化代码-->
 <script type="text/javascript">
     $(document).ready(function() {
-        var tablecol=[
+        var tableCol=[
             { "id": "序号" },
             { "name": "姓名" },
             { "account": "帐号" },
@@ -49,7 +49,7 @@
             { "create_time": "创建时间" },
             { "status": "状态" }
         ];
-        InitTableColums('showUserList',tablecol);
+        InitTableColums('showUserList',tableCol);
     });
 </script>
 </body>
