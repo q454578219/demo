@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2018-09-19 18:02:21
+Date: 2018-09-25 18:04:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -81,15 +81,17 @@ CREATE TABLE `user` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `status` int(1) NOT NULL DEFAULT '1',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`uid`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'hlhdidi', '123');
-INSERT INTO `user` VALUES ('2', 'xyycici', '1992');
-INSERT INTO `user` VALUES ('3', 'sujin', '123');
+INSERT INTO `user` VALUES ('1', 'hlhdidi', '123', '1', '2018-09-25 17:22:20');
+INSERT INTO `user` VALUES ('2', 'xyycici', '1992', '1', '2018-09-25 17:22:20');
+INSERT INTO `user` VALUES ('3', 'sujin', '123', '1', '2018-09-25 17:22:20');
 
 -- ----------------------------
 -- Table structure for user_role
