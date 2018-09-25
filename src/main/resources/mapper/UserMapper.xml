@@ -6,12 +6,16 @@
             <idArg column="uid" jdbcType="INTEGER" javaType="java.lang.Integer" />
             <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
             <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="create_time" jdbcType="DATE" javaType="java.util.Date" />
         </constructor>
     </resultMap>
     <resultMap type="com.example.demo.model.User" id="userMap">
         <id property="uid" column="uid"/>
         <result property="username" column="username"/>
         <result property="password" column="password"/>
+        <result property="status" column="status"/>
+        <result property="create_time" column="create_time"/>
         <collection property="roles" ofType="com.example.demo.model.Role">
             <id property="rid" column="rid"/>
             <result property="rname" column="rname"/>
@@ -22,13 +26,18 @@
         </collection>
     </resultMap>
     <sql id="Base_Column_List" >
-    uid, username, password
+    uid, username, password,status,create_time
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
         <include refid="Base_Column_List" />
         from user
         where uid = #{uid,jdbcType=INTEGER}
+    </select>
+    <select id="showUserList" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from user
     </select>
     <select id="queryUserName" parameterType="string" resultMap="userMap">
         SELECT u.*,r.*,m.* FROM user u inner join user_role ur on ur.uid=u.uid

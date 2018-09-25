@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+
 <html>
 <head>
     <title>Title</title>
@@ -13,6 +15,13 @@
 </style>
 <body>
 <div style="width: 98%;height:80%;min-height:520px;box-shadow: 1px 1px 1px 2px #d2d6de;border-radius:2px;margin: 10px auto" >
+    <div id="head" style="height: 70px;width: 100%;text-align: center;position:relative;">
+        <div class="btn-group" style="width: 95%;height:50%;margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;">
+            <shiro:hasPermission name="add"><button type="button" class="btn btn-default">按钮 1</button></shiro:hasPermission>
+            <shiro:hasPermission name="update"><button type="button" class="btn btn-default">按钮 2</button></shiro:hasPermission>
+            <shiro:hasPermission name="delete"><button type="button" class="btn btn-default">按钮 3</button></shiro:hasPermission>
+        </div>
+    </div>
     <table id="example"  class="table table-bordered table-striped table-hover" style="width: 95%;margin: 10px auto;border-radius: 5px;">
     <thead>
     <tr id="exampletr">
@@ -42,12 +51,12 @@
 <script type="text/javascript">
     $(document).ready(function() {
         var tableCol=[
-            { "id": "序号" },
-            { "name": "姓名" },
-            { "account": "帐号" },
+            { "uid": "序号" },
+            { "username": "姓名" },
+            // { "account": "帐号" },
             { "password": "密码" },
-            { "create_time": "创建时间" },
-            { "status": "状态" }
+            { "status": "状态" },
+            { "create_time": "创建时间" }
         ];
         InitTableColums('showUserList',tableCol);
     });

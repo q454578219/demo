@@ -45,24 +45,24 @@ public class HelloController {
         return "user/user_list";
     }
 
-//    @RequestMapping("/showUserList")
-//    @ResponseBody
-//    public String showUserList() {
-//        PageData pd = new PageData();
-//        String key1  = "hello1";
-//        Object a =redisService.get(key1);
-//        System.out.println(a);
-//        if(a!=null){
-//            return a.toString();
-//        }
-//        List<User> userList =  userService.showUserList();
-//        pd = new PageData();
-//        pd.setData(userList);
-//        pd.setiTotalDisplayRecords(10);
-//        pd.setiTotalRecords(100);
-//        redisService.set(key1,JSONObject.fromObject(pd).toString());
-//        return JSONObject.fromObject(pd).toString();
-//    }
+    @RequestMapping("/showUserList")
+    @ResponseBody
+    public String showUserList() {
+        PageData pd = new PageData();
+        String key1  = "hello1";
+        Object a =redisService.get(key1);
+        System.out.println(a);
+        if(a!=null){
+            return a.toString();
+        }
+        List<User> userList =  userService.showUserList();
+        pd = new PageData();
+        pd.setData(userList);
+        pd.setiTotalDisplayRecords(10);
+        pd.setiTotalRecords(100);
+        redisService.set(key1,JSONObject.fromObject(pd).toString());
+        return JSONObject.fromObject(pd).toString();
+    }
 
     @RequestMapping("/add")
     public String add(User user) {
@@ -93,11 +93,11 @@ public class HelloController {
 
     }
 
-    @RequestMapping("/logOut")
+    @RequestMapping("/logout")
     public String logOut(HttpSession session) {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-//        session.removeAttribute("user");
+        session.removeAttribute("user");
         return "login";
 
     }

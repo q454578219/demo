@@ -16,7 +16,7 @@ function InitTableColums(url,data){
     $('#example').dataTable({
         ajax:getRealPath()+url,
         ordering: false, // 禁止排序
-        searching: true,     // 搜索框
+        searching: false,     // 搜索框
         bLengthChange: false, //显示每页大小的下拉框（显示一个每页长度的选择条（需要分页器支持））
         bServerSide:true,//后端分页开启
         fnHeaderCallback: function (nHead, aData, iStart, iEnd, aiDisplay) {

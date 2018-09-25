@@ -16,8 +16,9 @@ public class UserServiceImpl implements UserService {
     public int addUser(User user){
         return  userDao.insert(user);
     };
-//    public List<User> showUserList(){
-//        System.out.println("打印则没有使用缓存");
-//        return  userDao.showUserList();
-//    }
+    public List<User> showUserList(){
+        System.out.println("打印则没有使用缓存");
+        List<User> userList = userDao.showUserList();
+        return  userList;
+    }
 }
