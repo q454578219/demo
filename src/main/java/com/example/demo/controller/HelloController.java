@@ -11,11 +11,14 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HelloController {
@@ -49,18 +52,18 @@ public class HelloController {
     @ResponseBody
     public String showUserList() {
         PageData pd = new PageData();
-        String key1  = "hello1";
-        Object a =redisService.get(key1);
+        String key1 = "hello1";
+        Object a = redisService.get(key1);
         System.out.println(a);
-        if(a!=null){
+        if (a != null) {
             return a.toString();
         }
-        List<User> userList =  userService.showUserList();
+        List<User> userList = userService.showUserList();
         pd = new PageData();
         pd.setData(userList);
         pd.setiTotalDisplayRecords(10);
         pd.setiTotalRecords(100);
-        redisService.set(key1,JSONObject.fromObject(pd).toString());
+        redisService.set(key1, JSONObject.fromObject(pd).toString());
         return JSONObject.fromObject(pd).toString();
     }
 
@@ -99,6 +102,18 @@ public class HelloController {
         subject.logout();
         session.removeAttribute("user");
         return "login";
+    }
 
+    @RequestMapping("/user_add")
+    public String user_add () {
+        return "user/user_add";
+    }
+
+
+    @RequestMapping("/user_add_save")
+    @ResponseBody
+    public String user_add_save(@RequestParam Map<String,Object> map){
+//        userService.addUser(user);
+        return JSONObject.fromObject("保存成功").toString();
     }
 }

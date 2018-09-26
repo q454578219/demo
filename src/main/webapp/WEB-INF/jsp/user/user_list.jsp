@@ -6,29 +6,40 @@
     <title>Title</title>
 </head>
 <style>
-    .ml6{
+    .ml6 {
         margin-left: 6%;
     }
-    .mr6{
+
+    .mr6 {
         margin-right: 6%;
     }
 </style>
 <body>
-<div style="width: 98%;height:80%;min-height:520px;box-shadow: 1px 1px 1px 2px #d2d6de;border-radius:2px;margin: 10px auto" >
+<div style="width: 98%;height:80%;min-height:520px;box-shadow: 1px 1px 1px 2px #d2d6de;border-radius:2px;margin: 10px auto">
     <div id="head" style="height: 70px;width: 100%;text-align: center;position:relative;">
-        <div class="btn-group" style="width: 95%;height:50%;margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;">
-            <shiro:hasPermission name="add"><button type="button" class="btn btn-default">按钮 1</button></shiro:hasPermission>
-            <shiro:hasPermission name="update"><button type="button" class="btn btn-default">按钮 2</button></shiro:hasPermission>
-            <shiro:hasPermission name="delete"><button type="button" class="btn btn-default">按钮 3</button></shiro:hasPermission>
+        <div class="btn-group"
+             style="width: 95%;height:50%;margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;">
+            <shiro:hasPermission name="add">
+                <button type="button" class="btn btn-default" onclick="x_admin_show('添加用户','user_add',500,350)">
+                    新增
+                </button>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="update">
+                <button type="button" class="btn btn-default">修改</button>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="delete">
+                <button type="button" class="btn btn-default">删除</button>
+            </shiro:hasPermission>
         </div>
     </div>
-    <table id="example"  class="table table-bordered table-striped table-hover" style="width: 95%;margin: 10px auto;border-radius: 5px;">
-    <thead>
-    <tr id="exampletr">
-    </tr>
-    </thead>
-    <tbody>
-</table>
+    <table id="example" class="table table-bordered table-striped table-hover"
+           style="width: 95%;margin: 10px auto;border-radius: 5px;">
+        <thead>
+        <tr id="exampletr">
+        </tr>
+        </thead>
+        <tbody>
+    </table>
 </div>
 <%--
 <script type="text/javascript" src="js/common.js"/>
@@ -39,26 +50,29 @@
 --%>
 <link rel="stylesheet" type="text/css" href="css/dataTable/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="css/dataTable/dataTables.bootstrap.css">
+<link rel="stylesheet" href="/css/xadmin.css">
 
 <!--引入JavaScript-->
 <script type="text/javascript" language="javascript" src="js/common.js"></script>
 <script type="text/javascript" language="javascript" src="js/dataTable/bootstrap.js"></script>
 <script type="text/javascript" language="javascript" src="js/dataTable/jquery.dataTables.js"></script>
 <script type="text/javascript" language="javascript" src="js/dataTable/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/xadmin.js"></script>
 
 
 <!--初始化代码-->
 <script type="text/javascript">
-    $(document).ready(function() {
-        var tableCol=[
-            { "uid": "序号" },
-            { "username": "姓名" },
+    $(document).ready(function () {
+        var tableCol = [
+            {"uid": "序号"},
+            {"username": "帐号"},
             // { "account": "帐号" },
-            { "password": "密码" },
-            { "status": "状态" },
-            { "create_time": "创建时间" }
+            {"password": "密码"},
+            {"status": "状态"},
+            {"create_time": "创建时间"}
         ];
-        InitTableColums('showUserList',tableCol);
+        InitTableColums('showUserList', tableCol);
     });
 </script>
 </body>

@@ -33,12 +33,15 @@ function InitTableColums(url,data){
     $(".dataTables_paginate").css('margin','0 4% 0 0');
     $('#example_filter').css('margin','20px 5%');
 }
-function getAjaxData(url) {
+function getAjaxData(url,param) {
     $.ajax({
         url: getRealPath()+url,
         type: "POST",
         dataType: "json", // 指定服务器返回的数据类型
+        contentType: 'application/json;charset=utf-8',
+        data:param,
         success: function (data) {
+            console.log(data);
             return data;
         }, error: function () {
             alert('error');
