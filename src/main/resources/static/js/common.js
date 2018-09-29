@@ -33,16 +33,16 @@ function InitTableColums(url,data){
     $(".dataTables_paginate").css('margin','0 4% 0 0');
     $('#example_filter').css('margin','20px 5%');
 }
-function getAjaxData(url,param) {
+function getAjaxData(url,param,callback) {
     $.ajax({
         url: getRealPath()+url,
         type: "POST",
         dataType: "json", // 指定服务器返回的数据类型
-        contentType: 'application/json;charset=utf-8',
+        // contentType: 'application/json;charset=utf-8',
         data:param,
         success: function (data) {
             console.log(data);
-            return data;
+            callback(data);
         }, error: function () {
             alert('error');
         }
@@ -76,6 +76,7 @@ function getRealPath() {
     return (realPath)+'/';
 
 }
+
 function timestampToStr(timestamp) {
     var d = new Date(timestamp);    //根据时间戳生成的时间对象
     var date = (d.getFullYear()) + "-" +
@@ -85,4 +86,24 @@ function timestampToStr(timestamp) {
         (d.getMinutes()) + ":" +
         (d.getSeconds());
     return date;
+}
+
+function textHtml(id,name,width){
+    width=width?width:200;
+    var html='<div class="form-group">'+
+        '<label for="name" class="fl modelLabel">'+name+'</label>'+
+        '<input type="text" class="form-control fl" id="'+id+'" placeholder="请输入'+name+'" style="width:'+width+'">'+
+        '</div>';
+    return html;
+}
+
+function selectHtml(id,name,width){
+    width=width?width:200;
+    var html= '<div class="form-group">'+
+        '<label for="name" class="fl modelLabel">'+name+'</label>'+
+        '<select class="selectpicker show-tick form-control" data-live-search="true"  style="width:'+width+'">  ' +
+        '   <option value="1">启用</option>'+
+        '   <option value="0">禁用</option>' +
+        '</select>';
+    return html;
 }

@@ -9,6 +9,7 @@ import net.sf.json.JSONObject;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,8 @@ public class HelloController {
 
     @Autowired
     private RedisService redisService;
+
+    public static final String SAVE_SUCCESS="保存成功"; //定义中用了final,就是不能改变的。
 
     @RequestMapping("/index")
     public String hello() {
@@ -113,7 +116,13 @@ public class HelloController {
     @RequestMapping("/user_add_save")
     @ResponseBody
     public String user_add_save(@RequestParam Map<String,Object> map){
+        User user = new User();
+        user.setUsername((String)map.get("username"));
+        user.setPassword((String)map.get("password"));
 //        userService.addUser(user);
-        return JSONObject.fromObject("保存成功").toString();
+        JSONObject jo = new JSONObject();
+        jo.put("message",SAVE_SUCCESS);
+        System.out.println(jo.toString());
+        return jo.toString();
     }
 }

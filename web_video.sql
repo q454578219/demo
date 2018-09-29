@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2018-09-25 18:04:56
+Date: 2018-09-29 18:49:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,18 +20,25 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `module`;
 CREATE TABLE `module` (
-  `mid` int(11) NOT NULL AUTO_INCREMENT,
-  `mname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `mid` int(11) NOT NULL AUTO_INCREMENT COMMENT '序号',
+  `mname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '菜单名称',
+  `mcode` varchar(255) NOT NULL COMMENT '菜单编码',
+  `murl` varchar(255) NOT NULL COMMENT '菜单地址',
+  `micon` varchar(255) NOT NULL COMMENT '图片',
+  `mparent` int(11) DEFAULT NULL COMMENT '父节点',
+  `morder` int(3) DEFAULT NULL COMMENT '排序',
+  `mstatus` int(1) NOT NULL DEFAULT '1' COMMENT '状态 开启：1 关闭：0',
+  `mremark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`mid`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of module
 -- ----------------------------
-INSERT INTO `module` VALUES ('1', 'add');
-INSERT INTO `module` VALUES ('2', 'delete');
-INSERT INTO `module` VALUES ('3', 'query');
-INSERT INTO `module` VALUES ('4', 'update');
+INSERT INTO `module` VALUES ('1', '系统菜单', 'SYSTEM', '', '', '0', '1', '1', null);
+INSERT INTO `module` VALUES ('2', '用户管理', 'SYSTEM:USER', '', '', '1', '1', '1', null);
+INSERT INTO `module` VALUES ('3', '菜单管理', 'SYSTEM:MODULE', '', '', '1', '2', '1', null);
+INSERT INTO `module` VALUES ('4', '角色管理', 'SYSTEM:ROLE', '', '', '1', '3', '1', null);
 
 -- ----------------------------
 -- Table structure for module_role

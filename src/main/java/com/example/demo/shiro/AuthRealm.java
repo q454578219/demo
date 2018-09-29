@@ -42,7 +42,7 @@ public class AuthRealm extends AuthorizingRealm {
                 Set<Module> modules = role.getModules();
                 if (modules.size() > 0) {
                     for (Module module : modules) {
-                        permissions.add(module.getMname());
+                        permissions.add(module.getMcode());
                     }
                 }
             }

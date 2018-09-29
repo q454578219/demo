@@ -15,12 +15,13 @@
     }
 </style>
 <body>
+<%@ include file="/WEB-INF/jsp/modelWindow.jsp" %>
 <div style="width: 98%;height:80%;min-height:520px;box-shadow: 1px 1px 1px 2px #d2d6de;border-radius:2px;margin: 10px auto">
     <div id="head" style="height: 70px;width: 100%;text-align: center;position:relative;">
         <div class="btn-group"
              style="width: 95%;height:50%;margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;">
             <shiro:hasPermission name="add">
-                <button type="button" class="btn btn-default" onclick="x_admin_show('添加用户','user_add',500,350)">
+                <button type="button" class="btn btn-default" data-toggle="modal" onclick="showUser_add()">
                     新增
                 </button>
             </shiro:hasPermission>
@@ -74,6 +75,10 @@
         ];
         InitTableColums('showUserList', tableCol);
     });
+    function showUser_add(){
+        var content = '<table><tr><td>'+textHtml('username','帐号',200)+'</td></tr><tr><td>'+textHtml('username','密码',200)+'</td></tr><tr><td>'+selectHtml('status','状态',200)+'</td></tr></table>'
+        showModel("新增用户",content);
+    }
 </script>
 </body>
 </html>

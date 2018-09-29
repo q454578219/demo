@@ -22,6 +22,10 @@
             <collection property="modules" ofType="com.example.demo.model.Module">
                 <id property="mid" column="mid"/>
                 <result property="mname" column="mname"/>
+                <result property="mcode" column="mcode"/>
+                <result property="morder" column="morder"/>
+                <result property="murl" column="murl"/>
+                <result property="mparent" column="mparent"/>
             </collection>
         </collection>
     </resultMap>
@@ -44,7 +48,8 @@
         inner join role r on r.rid=ur.rid
         inner join module_role mr on mr.rid=r.rid
         inner join module m on mr.mid=m.mid
-        WHERE username=#{username};
+        WHERE username=#{username}
+        order by m.morder;
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user
