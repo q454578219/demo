@@ -20,15 +20,15 @@
     <div id="head" style="height: 70px;width: 100%;text-align: center;position:relative;">
         <div class="btn-group"
              style="width: 95%;height:50%;margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;">
-            <shiro:hasPermission name="add">
+            <shiro:hasPermission name="user:add">
                 <button type="button" class="btn btn-default" data-toggle="modal" onclick="showUser_add()">
                     新增
                 </button>
             </shiro:hasPermission>
-            <shiro:hasPermission name="update">
+            <shiro:hasPermission name="user:update">
                 <button type="button" class="btn btn-default">修改</button>
             </shiro:hasPermission>
-            <shiro:hasPermission name="delete">
+            <shiro:hasPermission name="user:delete">
                 <button type="button" class="btn btn-default">删除</button>
             </shiro:hasPermission>
         </div>
@@ -71,7 +71,7 @@
             // { "account": "帐号" },
             {"password": "密码"},
             {"status": "状态"},
-            {"create_time": "创建时间"}
+            {"create_time_str": "创建时间"}
         ];
         InitTableColums('showUserList', tableCol);
     });

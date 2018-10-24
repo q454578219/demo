@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
     <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
     <script src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
 
@@ -30,16 +31,29 @@
     <div id="darkbannerwrap"></div>
 
     <form method="post" class="layui-form" >
-        <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+        <input id="username" name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
         <hr class="hr15">
-        <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+        <input id="password" name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
         <hr class="hr15">
-        <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="button">
+        <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="button" onclick="login()">
         <hr class="hr20" >
     </form>
 </div>
 
 <script type="text/javascript">
+    function login(){
+        var param ={
+            username:$('#username').val(),
+            password:$('#password').val()
+        }
+        getAjaxData("loginUser",param,callback)
+    }
+    function callback(data) {
+        alert(data.msg);
+       if(data.flag){
+           jumpUrl("index");
+       }
+    }
 
 </script>
 

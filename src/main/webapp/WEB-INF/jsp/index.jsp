@@ -109,9 +109,7 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
-    var username = ${sessionScope.user.username };
-    console.log("username:::" + username);
-    function initMenuNav(){
+    for(var i=0;i<${sessionScope.user.roles.size()};i++){
 
     }
 </script>

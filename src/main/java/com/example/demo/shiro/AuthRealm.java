@@ -1,6 +1,7 @@
 package com.example.demo.shiro;
 
 import com.example.demo.dao.UserDao;
+import com.example.demo.model.Button;
 import com.example.demo.model.Module;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
@@ -43,6 +44,12 @@ public class AuthRealm extends AuthorizingRealm {
                 if (modules.size() > 0) {
                     for (Module module : modules) {
                         permissions.add(module.getMcode());
+                    }
+                }
+                Set<Button> buttons = role.getButtons();
+                if (buttons.size() > 0) {
+                    for (Button button : buttons) {
+                        permissions.add(button.getBcode());
                     }
                 }
             }

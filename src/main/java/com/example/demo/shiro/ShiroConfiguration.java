@@ -29,7 +29,7 @@ public class ShiroConfiguration {
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
         filterChainDefinitionMap.put("/login*", "anon"); //表示可以匿名访问
-        filterChainDefinitionMap.put("/loginUser", "anon");
+        filterChainDefinitionMap.put("/index*", "anon"); //表示可以匿名访问
         filterChainDefinitionMap.put("/client/test", "anon");
         filterChainDefinitionMap.put("/assert/test", "anon");//添加白名单
         filterChainDefinitionMap.put("/assert/get", "anon");//添加白名单
@@ -39,6 +39,14 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/logout*","anon");
         filterChainDefinitionMap.put("/jsp/error.jsp*","anon");
         filterChainDefinitionMap.put("/jsp/login.jsp*","authc");
+        //静态文件不设置过滤S
+        filterChainDefinitionMap.put("/img/**", "anon");//img
+        filterChainDefinitionMap.put("/images/**", "anon");//img
+        filterChainDefinitionMap.put("/js/**", "anon");//js
+        filterChainDefinitionMap.put("/css/**", "anon");//css
+        filterChainDefinitionMap.put("/fonts/**", "anon");//css
+        filterChainDefinitionMap.put("/lib/**", "anon");//img
+        //静态文件不设置过滤E
         filterChainDefinitionMap.put("/*", "authc");//表示需要认证才可以访问
         filterChainDefinitionMap.put("/**", "authc");//表示需要认证才可以访问
         filterChainDefinitionMap.put("/*.*", "authc");

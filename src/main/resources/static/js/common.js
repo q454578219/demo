@@ -107,3 +107,8 @@ function selectHtml(id,name,width){
         '</select>';
     return html;
 }
+
+function jumpUrl(url){
+    console.log(getRealPath()+url);
+    window.location.href=getRealPath()+url;
+}

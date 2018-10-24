@@ -9,10 +9,8 @@ import net.sf.json.JSONObject;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,6 +49,30 @@ public class HelloController {
         return "user/user_list";
     }
 
+    @ResponseBody
+    @RequestMapping("/loginUser")
+    public String loginUser(String username, String password, HttpSession session) {
+        //授权认证
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
+        Subject subject = SecurityUtils.getSubject();
+        JSONObject jo = new JSONObject();
+        try {
+            //完成登录
+            subject.login(usernamePasswordToken);
+            //获得用户对象
+            User user = (User) subject.getPrincipal();
+            //存入session
+            session.setAttribute("user", user);
+            jo.put("msg","登录成功。");
+            jo.put("flag",true);
+        } catch (Exception e) {
+            jo.put("msg","账号名或密码错误。");
+            jo.put("flag",false);
+        }finally {
+            return jo.toString();
+        }
+
+    }
     @RequestMapping("/showUserList")
     @ResponseBody
     public String showUserList() {
@@ -80,24 +102,6 @@ public class HelloController {
         return "a";
     }
 
-    @RequestMapping("/loginUser")
-    public String loginUser(String username, String password, HttpSession session) {
-        //授权认证
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
-        Subject subject = SecurityUtils.getSubject();
-        try {
-            //完成登录
-            subject.login(usernamePasswordToken);
-            //获得用户对象
-            User user = (User) subject.getPrincipal();
-            //存入session
-            session.setAttribute("user", user);
-            return "index";
-        } catch (Exception e) {
-            return "login";//返回登录页面
-        }
-
-    }
 
     @RequestMapping("/logout")
     public String logOut(HttpSession session) {

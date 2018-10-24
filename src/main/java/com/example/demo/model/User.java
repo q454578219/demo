@@ -1,5 +1,8 @@
 package com.example.demo.model;
 
+
+import com.example.demo.utils.DateUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -15,6 +18,8 @@ public class User implements Serializable{
     private Integer status;
 
     private Date create_time;
+
+    private String create_time_str;
 
     private Set<Role> roles = new HashSet<>();
 
@@ -69,6 +74,7 @@ public class User implements Serializable{
 
     public void setCreate_time(Date create_time) {
         this.create_time = create_time;
+        setCreate_time_str(DateUtils.DateToString(create_time,DateUtils.DATE_TO_STRING_DETAIAL_PATTERN));
     }
 
     public Set<Role> getRoles() {
@@ -77,5 +83,13 @@ public class User implements Serializable{
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getCreate_time_str() {
+        return create_time_str;
+    }
+
+    public void setCreate_time_str(String create_time_str) {
+        this.create_time_str = create_time_str;
     }
 }

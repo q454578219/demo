@@ -10,6 +10,7 @@ public class Role {
 
     private Set<User> users = new HashSet<>();
     private Set<Module> Modules = new HashSet<>();
+    private Set<Button> Buttons = new HashSet<>();
 
     public Role(Integer rid, String rname) {
         this.rid = rid;
@@ -50,5 +51,13 @@ public class Role {
 
     public void setModules(Set<Module> modules) {
         Modules = modules;
+    }
+
+    public Set<Button> getButtons() {
+        return Buttons;
+    }
+
+    public void setButtons(Set<Button> buttons) {
+        Buttons = buttons;
     }
 }
