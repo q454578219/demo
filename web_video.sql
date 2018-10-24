@@ -10,10 +10,46 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2018-09-29 18:49:35
+Date: 2018-10-24 18:12:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for button
+-- ----------------------------
+DROP TABLE IF EXISTS `button`;
+CREATE TABLE `button` (
+  `bid` int(11) NOT NULL AUTO_INCREMENT,
+  `bname` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `bcode` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`bid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of button
+-- ----------------------------
+INSERT INTO `button` VALUES ('1', '用户新增', 'user:add');
+INSERT INTO `button` VALUES ('2', '用户修改', 'user:update');
+INSERT INTO `button` VALUES ('3', '用户删除', 'user:delete');
+
+-- ----------------------------
+-- Table structure for button_role
+-- ----------------------------
+DROP TABLE IF EXISTS `button_role`;
+CREATE TABLE `button_role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roleid` int(11) NOT NULL,
+  `buttonid` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of button_role
+-- ----------------------------
+INSERT INTO `button_role` VALUES ('1', '1', '1');
+INSERT INTO `button_role` VALUES ('2', '1', '2');
+INSERT INTO `button_role` VALUES ('3', '1', '3');
 
 -- ----------------------------
 -- Table structure for module
@@ -96,7 +132,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'hlhdidi', '123', '1', '2018-09-25 17:22:20');
+INSERT INTO `user` VALUES ('1', 'admin', '123', '1', '2018-09-25 17:22:20');
 INSERT INTO `user` VALUES ('2', 'xyycici', '1992', '1', '2018-09-25 17:22:20');
 INSERT INTO `user` VALUES ('3', 'sujin', '123', '1', '2018-09-25 17:22:20');
 
