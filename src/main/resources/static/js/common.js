@@ -41,7 +41,6 @@ function getAjaxData(url,param,callback) {
         // contentType: 'application/json;charset=utf-8',
         data:param,
         success: function (data) {
-            console.log(data);
             callback(data);
         }, error: function () {
             alert('error');

@@ -48,7 +48,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button id="btnCommit" type="button" class="btn btn-primary" onclick="">
                     提交更改
                 </button>
             </div>
@@ -57,11 +57,13 @@
 </div>
 </body>
 <script type="text/javascript">
-    function showModel(title,content,width){
+    function showModel(title,content,width,commitfunction){
         $('#myModal').modal('show');
         $('#myModalLabel').text(title);
         $('#myModalContent').html(content);
         $('#myModalDialog').width(width?width:500);
+        debugger;
+        $('#btnCommit').attr("onclick",commitfunction+"()");
     }
 </script>
 </html>

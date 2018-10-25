@@ -71,13 +71,16 @@
             // { "account": "帐号" },
             {"password": "密码"},
             {"status": "状态"},
-            {"create_time_str": "创建时间"}
+            {"create_time": "创建时间"}
         ];
         InitTableColums('showUserList', tableCol);
     });
     function showUser_add(){
         var content = '<table><tr><td>'+textHtml('username','帐号',200)+'</td></tr><tr><td>'+textHtml('username','密码',200)+'</td></tr><tr><td>'+selectHtml('status','状态',200)+'</td></tr></table>'
-        showModel("新增用户",content);
+        showModel("新增用户",content,null,"saveUser");
+    }
+    function saveUser() {
+        alert("123");
     }
 </script>
 </body>

@@ -1,3 +1,4 @@
+var initLeftNavClick;
 $(function () {
     //加载弹出层
     layui.use(['form','element'],
@@ -105,47 +106,48 @@ $(function () {
             }
        }
     })
+    initLeftNavClick = function(){
+        //左侧菜单效果
+        // $('#content').bind("click",function(event){
+        $('.left-nav #nav li').click(function (event) {
 
-    //左侧菜单效果
-    // $('#content').bind("click",function(event){
-    $('.left-nav #nav li').click(function (event) {
-
-        if($(this).children('.sub-menu').length){
-            if($(this).hasClass('open')){
-                $(this).removeClass('open');
-                $(this).find('.nav_right').html('&#xe697;');
-                $(this).children('.sub-menu').stop().slideUp();
-                $(this).siblings().children('.sub-menu').slideUp();
-            }else{
-                $(this).addClass('open');
-                $(this).children('a').find('.nav_right').html('&#xe6a6;');
-                $(this).children('.sub-menu').stop().slideDown();
-                $(this).siblings().children('.sub-menu').stop().slideUp();
-                $(this).siblings().find('.nav_right').html('&#xe697;');
-                $(this).siblings().removeClass('open');
-            }
-        }else{
-
-            var url = $(this).children('a').attr('_href');
-            var title = $(this).find('cite').html();
-            var index  = $('.left-nav #nav li').index($(this));
-
-            for (var i = 0; i <$('.x-iframe').length; i++) {
-                if($('.x-iframe').eq(i).attr('tab-id')==index+1){
-                    tab.tabChange(index+1);
-                    event.stopPropagation();
-                    return;
+            if($(this).children('.sub-menu').length){
+                if($(this).hasClass('open')){
+                    $(this).removeClass('open');
+                    $(this).find('.nav_right').html('&#xe697;');
+                    $(this).children('.sub-menu').stop().slideUp();
+                    $(this).siblings().children('.sub-menu').slideUp();
+                }else{
+                    $(this).addClass('open');
+                    $(this).children('a').find('.nav_right').html('&#xe6a6;');
+                    $(this).children('.sub-menu').stop().slideDown();
+                    $(this).siblings().children('.sub-menu').stop().slideUp();
+                    $(this).siblings().find('.nav_right').html('&#xe697;');
+                    $(this).siblings().removeClass('open');
                 }
-            };
-            
-            tab.tabAdd(title,url,index+1);
-            tab.tabChange(index+1);
-        }
-        
-        event.stopPropagation();
-         
-    })
-    
+            }else{
+
+                var url = $(this).children('a').attr('_href');
+                var title = $(this).find('cite').html();
+                var index  = $('.left-nav #nav li').index($(this));
+
+                for (var i = 0; i <$('.x-iframe').length; i++) {
+                    if($('.x-iframe').eq(i).attr('tab-id')==index+1){
+                        tab.tabChange(index+1);
+                        event.stopPropagation();
+                        return;
+                    }
+                };
+
+                tab.tabAdd(title,url,index+1);
+                tab.tabChange(index+1);
+            }
+
+            event.stopPropagation();
+
+        })
+    }
+    initLeftNavClick();
 })
 var cateIds = [];
 function getCateId(cateId) {

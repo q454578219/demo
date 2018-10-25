@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.dao.ModuleMapper" >
+<mapper namespace="com.example.demo.dao.ModuleDao" >
     <resultMap id="BaseResultMap" type="com.example.demo.model.Module" >
         <constructor >
             <idArg column="mid" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -15,6 +15,11 @@
         <include refid="Base_Column_List" />
         from module
         where mid = #{mid,jdbcType=INTEGER}
+    </select>
+    <select id="showModuleList" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from module
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from module
@@ -57,4 +62,13 @@
     set mname = #{mname,jdbcType=VARCHAR}
     where mid = #{mid,jdbcType=INTEGER}
   </update>
+
+    <select id="showModuleListByUser" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select distinct m.*
+        from user_role ur
+        left join module_role mr on mr.rid=ur.rid
+        left join module m on m.mid=mr.mid
+        where ur.uid=#{uid,jdbcType=INTEGER}
+        order by mparent asc ,morder asc
+    </select>
 </mapper>

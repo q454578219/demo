@@ -23,6 +23,16 @@
     <script type="text/javascript" src="./js/xadmin.js"></script>
     <script type="text/javascript" language="javascript" src="js/common.js"></script>
 </head>
+<style>
+    .li_img{
+        width: 30px;
+        height: 30px;
+    }
+    .li_img2{
+        width: 20px;
+        height: 20px;
+    }
+</style>
 <body>
 <!-- 顶部开始 -->
 <div class="container">
@@ -30,16 +40,6 @@
     <div class="left_open">
         <i title="展开左侧栏" class="iconfont">&#xe699;</i>
     </div>
-    <ul class="layui-nav left fast-add" lay-filter="">
-        <li class="layui-nav-item">
-            <a href="javascript:;">+新增</a>
-            <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                <dd><a onclick="x_admin_show('资讯','http://www.baidu.com')"><i class="iconfont">&#xe6a2;</i>资讯</a></dd>
-                <dd><a onclick="x_admin_show('图片','http://www.baidu.com')"><i class="iconfont">&#xe6a8;</i>图片</a></dd>
-                <dd><a onclick="x_admin_show('用户','http://www.baidu.com')"><i class="iconfont">&#xe6b8;</i>用户</a></dd>
-            </dl>
-        </li>
-    </ul>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
             <a href="javascript:;">admin</a>
@@ -59,21 +59,6 @@
 <div class="left-nav">
     <div id="side-nav">
         <ul id="nav" id ="menu_nav">
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe6b8;</i>
-                    <cite>会员管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="user_list">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员列表</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
         </ul>
     </div>
 </div>
@@ -101,17 +86,25 @@
 </div>
 <!-- 底部结束 -->
 <script>
-    //百度统计可去掉
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-    for(var i=0;i<${sessionScope.user.roles.size()};i++){
-
+    $(function () {
+        getMenuTree();
+    });
+    function getMenuTree(){
+        getAjaxData("showModuleListByUser",null,InitMenu);
     }
+    function InitMenu(datalist) {
+        console.log(datalist);
+        for(var i =0;i<datalist.length;i++){
+            var data =datalist[i];
+            if(data.mparent==0){//拼接第一级
+                $('#nav').append('<li id="menuli'+data.mid+'"><a href="javascript:;"><img class="li_img" src="/img/'+data.micon+'.png"><cite>'+data.mname+'</cite><i class="iconfont nav_right">&#xe697;</i></a><ul id="ul'+data.mid+'" class="sub-menu" ></ul></li>')
+            }else{//拼接第二级
+                $('#ul'+data.mparent).append('<li><a  _href="'+data.murl+'"><img class="li_img2" src="/img/'+data.micon+'.png"><cite>'+data.mname+'</cite></a></li>');
+            }
+        }
+        initLeftNavClick();//xadmin本来加载左边菜单的方法 但是由于数据获取执行速度没有加载 重新加载一遍
+    }
+
 </script>
 </body>
 </html>
