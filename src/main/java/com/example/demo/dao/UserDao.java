@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface UserDao{
 
-    int insert(@Param("user") User user);
+    int insert( User user);
 
     User queryUserName(String name);
 

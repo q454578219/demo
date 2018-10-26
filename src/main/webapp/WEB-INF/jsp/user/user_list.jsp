@@ -52,6 +52,8 @@
 <link rel="stylesheet" type="text/css" href="css/dataTable/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="css/dataTable/dataTables.bootstrap.css">
 <link rel="stylesheet" href="/css/xadmin.css">
+<link rel="stylesheet" href="/css/animate.css">
+
 
 <!--引入JavaScript-->
 <script type="text/javascript" language="javascript" src="js/common.js"></script>
@@ -60,6 +62,8 @@
 <script type="text/javascript" language="javascript" src="js/dataTable/dataTables.bootstrap.js"></script>
 <script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/js/xadmin.js"></script>
+<script type="text/javascript" language="javascript" src="js/bootstrap-notify.js"></script>
+
 
 
 <!--初始化代码-->
@@ -76,11 +80,24 @@
         InitTableColums('showUserList', tableCol);
     });
     function showUser_add(){
-        var content = '<table><tr><td>'+textHtml('username','帐号',200)+'</td></tr><tr><td>'+textHtml('username','密码',200)+'</td></tr><tr><td>'+selectHtml('status','状态',200)+'</td></tr></table>'
+        var content = '<table><tr><td>'+textHtml('username','帐号',200)+'</td></tr><tr><td>'+textHtml('password','密码',200)+'</td></tr><tr><td>'+selectHtml('status','状态',200)+'</td></tr></table>'
         showModel("新增用户",content,null,"saveUser");
     }
     function saveUser() {
-        alert("123");
+        var param ={
+            username:$('#username').val(),
+            password:$('#password').val(),
+            status:$('#status').val()
+        }
+        getAjaxData("saveUser",param,callback)
+    }
+    function callback(data){
+        $('#myModal').modal('hide');
+        if(data.flag=='true'){
+            openAlert(data.msg,'success');
+        }else{
+            openAlert(data.msg,'danger');
+        }
     }
 </script>
 </body>

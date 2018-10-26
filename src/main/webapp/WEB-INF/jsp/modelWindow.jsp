@@ -62,7 +62,6 @@
         $('#myModalLabel').text(title);
         $('#myModalContent').html(content);
         $('#myModalDialog').width(width?width:500);
-        debugger;
         $('#btnCommit').attr("onclick",commitfunction+"()");
     }
 </script>

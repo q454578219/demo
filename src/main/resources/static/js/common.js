@@ -100,7 +100,7 @@ function selectHtml(id,name,width){
     width=width?width:200;
     var html= '<div class="form-group">'+
         '<label for="name" class="fl modelLabel">'+name+'</label>'+
-        '<select class="selectpicker show-tick form-control" data-live-search="true"  style="width:'+width+'">  ' +
+        '<select id="'+id+'" class="selectpicker show-tick form-control" data-live-search="true"  style="width:'+width+'">  ' +
         '   <option value="1">启用</option>'+
         '   <option value="0">禁用</option>' +
         '</select>';
@@ -110,4 +110,21 @@ function selectHtml(id,name,width){
 function jumpUrl(url){
     console.log(getRealPath()+url);
     window.location.href=getRealPath()+url;
+}
+function openAlert(msg,type){
+    msg=msg||"连接服务器失败";
+    type=type||"danger";
+    $.notifyDefaults({
+        placement: {
+            from: "top"
+        },
+        type: type,
+        allow_dismiss: false
+    });
+    $.notify(msg,{
+        z_index: 1031,
+        placement: {
+            align: "center"
+        }
+    });
 }

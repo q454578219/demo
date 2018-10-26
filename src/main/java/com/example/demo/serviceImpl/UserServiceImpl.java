@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
-    public int addUser(User user){
+    public int addUser(User user) {
         return  userDao.insert(user);
     };
     public List<User> showUserList(){
