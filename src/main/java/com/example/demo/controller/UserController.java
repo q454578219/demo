@@ -27,8 +27,7 @@ public class UserController {
         user.setPassword((String) map.get("password"));
         user.setStatus(Integer.parseInt((String)map.get("status")));
         int i =userService.addUser(user);
-        System.out.println(CommonUtils.isOperationOk(i));
-        return "1";
-//        return CommonUtils.isOperationOk(i);
+        System.out.println((CommonUtils.isOperationOk(i)));
+        return CommonUtils.isOperationOk(i);
     }
 }

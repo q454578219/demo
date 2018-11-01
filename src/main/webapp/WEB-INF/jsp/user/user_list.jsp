@@ -16,7 +16,7 @@
 </style>
 <body>
 <%@ include file="/WEB-INF/jsp/modelWindow.jsp" %>
-<div style="width: 98%;height:80%;min-height:520px;box-shadow: 1px 1px 1px 2px #d2d6de;border-radius:2px;margin: 10px auto">
+<div style="width: 98%;height:80%;min-height:600px;box-shadow: 1px 1px 1px 2px #d2d6de;border-radius:2px;margin: 10px auto">
     <div id="head" style="height: 70px;width: 100%;text-align: center;position:relative;">
         <div class="btn-group"
              style="width: 95%;height:50%;margin: auto;  position: absolute;  top: 0; left: 0; bottom: 0; right: 0;">
@@ -25,9 +25,9 @@
                     新增
                 </button>
             </shiro:hasPermission>
-            <shiro:hasPermission name="user:update">
-                <button type="button" class="btn btn-default">修改</button>
-            </shiro:hasPermission>
+            <%--<shiro:hasPermission name="user:update">--%>
+                <%--<button type="button" class="btn btn-default">修改</button>--%>
+            <%--</shiro:hasPermission>--%>
             <shiro:hasPermission name="user:delete">
                 <button type="button" class="btn btn-default">删除</button>
             </shiro:hasPermission>
@@ -77,7 +77,7 @@
             {"status": "状态"},
             {"create_time": "创建时间"}
         ];
-        InitTableColums('showUserList', tableCol);
+        InitTableColums('showUserList', tableCol,true);
     });
     function showUser_add(){
         var content = '<table><tr><td>'+textHtml('username','帐号',200)+'</td></tr><tr><td>'+textHtml('password','密码',200)+'</td></tr><tr><td>'+selectHtml('status','状态',200)+'</td></tr></table>'
@@ -93,7 +93,8 @@
     }
     function callback(data){
         $('#myModal').modal('hide');
-        if(data.flag=='true'){
+        debugger;
+        if(data.flag){
             openAlert(data.msg,'success');
         }else{
             openAlert(data.msg,'danger');

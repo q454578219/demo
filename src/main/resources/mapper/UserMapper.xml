@@ -7,7 +7,7 @@
             <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
             <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
             <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <arg column="create_time" jdbcType="DATE" javaType="java.util.Date" />
+            <arg column="create_time" jdbcType="DATE" javaType="java.lang.String" />
         </constructor>
     </resultMap>
     <resultMap type="com.example.demo.model.User" id="userMap">

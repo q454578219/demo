@@ -4,11 +4,13 @@ package com.example.demo.model;
 import com.example.demo.utils.DateUtils;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 //用户
 public class User implements Serializable{
+
     private Integer uid;
 
     private String username;
@@ -17,13 +19,13 @@ public class User implements Serializable{
 
     private Integer status;
 
-    private Date create_time;
+    private String create_time;
 
 
     private Set<Role> roles = new HashSet<>();
 
 
-    public User(Integer uid, String username, String password,Integer status,Date create_time) {
+    public User(Integer uid, String username, String password,Integer status,String create_time) {
         this.uid = uid;
         this.username = username;
         this.password = password;
@@ -67,11 +69,11 @@ public class User implements Serializable{
         this.status = status;
     }
 
-    public Date getCreate_time() {
+    public String getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(Date create_time) {
+    public void setCreate_time(String create_time) {
         this.create_time = create_time;
     }
 

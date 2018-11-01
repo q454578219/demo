@@ -77,18 +77,19 @@ public class HelloController {
     @ResponseBody
     public String showUserList() {
         PageData pd = new PageData();
-        String key1 = "hello1";
-        Object a = redisService.get(key1);
-        System.out.println(a);
-        if (a != null) {
-            return a.toString();
-        }
+//        String key1 = "hello1";
+//        Object a = redisService.get(key1);
+//        System.out.println(a);
+//        if (a != null) {
+//            return a.toString();
+//        }
         List<User> userList = userService.showUserList();
         pd = new PageData();
+        // 格式化日期
         pd.setData(userList);
         pd.setiTotalDisplayRecords(10);
         pd.setiTotalRecords(100);
-        redisService.set(key1, JSONObject.fromObject(pd).toString());
+//        redisService.set(key1, JSONObject.fromObject(pd).toString());
         return JSONObject.fromObject(pd).toString();
     }
 

@@ -1,10 +1,20 @@
 document.write("<script type=\"text/javascript\" src=\"js/jquery-3.3.1.js\"></script>");
 var columNameList=[];
 var columChinaNameList=[];
-function InitTableColums(url,data){
+function InitTableColums(url,data,checkbox){
+    if(checkbox){
+        var o = new Object();
+        o.data="";
+        columChinaNameList.push(o);
+        o = new Object();
+        o.render =function (data, type, full, meta) {return '<input type="checkbox" name="tableSelect" value="'+data.uid+'" class="checkchild"/>'};
+        o.data=null;
+        columNameList.push(o);
+
+    }
     for(var i=0;i<data.length;i++){
         for(var key in data[i]){
-            var o = new Object();
+            o = new Object();
             o.data  = key;
             columNameList.push(o);
             o = new Object();
@@ -12,7 +22,7 @@ function InitTableColums(url,data){
             columChinaNameList.push(o);
         }
     }
-    console.log(getRealPath()+url);
+
     $('#example').dataTable({
         ajax:getRealPath()+url,
         ordering: false, // 禁止排序
