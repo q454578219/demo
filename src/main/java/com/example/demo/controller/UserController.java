@@ -27,7 +27,21 @@ public class UserController {
         user.setPassword((String) map.get("password"));
         user.setStatus(Integer.parseInt((String)map.get("status")));
         int i =userService.addUser(user);
-        System.out.println((CommonUtils.isOperationOk(i)));
+        return CommonUtils.isOperationOk(i);
+    }
+
+    @RequestMapping("/getUserById")
+    @ResponseBody
+    public User getUserById(@RequestParam Map<String,Object> map){
+        User user =userService.selectByPrimaryKey(Integer.parseInt((String)map.get("id")) );
+        return user;
+    }
+
+    @RequestMapping("/deleteUser")
+    @ResponseBody
+    public String deleteUser(@RequestParam Map<String,Object> map){
+        String ids = (String)map.get("ids");
+        int i =userService.deleteUser(ids);
         return CommonUtils.isOperationOk(i);
     }
 }

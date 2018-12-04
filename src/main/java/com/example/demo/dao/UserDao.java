@@ -11,7 +11,11 @@ public interface UserDao{
 
     int insert( User user);
 
+    int deleteByPrimaryKey(int uid);
+
     User queryUserName(String name);
 
     List<User> showUserList();
+
+    User selectByPrimaryKey(int uid);
 }

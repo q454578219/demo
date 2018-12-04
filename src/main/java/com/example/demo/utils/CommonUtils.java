@@ -14,4 +14,11 @@ public class CommonUtils {
         }
         return rsStr;
     }
+    public static Boolean isEmpty(String param){
+        if(param==null||param=="null"||param==""||param=="undefined"){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

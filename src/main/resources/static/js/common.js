@@ -4,7 +4,7 @@ var columChinaNameList=[];
 function InitTableColums(url,data,checkbox){
     if(checkbox){
         var o = new Object();
-        o.data="";
+        o.data='<input type="checkbox" id="selectAll"  onclick="selectAll()" value="0"  class="checkchild"/>'
         columChinaNameList.push(o);
         o = new Object();
         o.render =function (data, type, full, meta) {return '<input type="checkbox" name="tableSelect" value="'+data.uid+'" class="checkchild"/>'};
@@ -16,6 +16,13 @@ function InitTableColums(url,data,checkbox){
         for(var key in data[i]){
             o = new Object();
             o.data  = key;
+            if(key=="edit") {
+                o.data=null;
+                o.render = function (data, type, full, meta) {
+                    return '<button type="button" class="btn btn-default" data-toggle="modal" onclick="showUser_add('+data.uid+')">编辑</button>'
+                };
+            }
+
             columNameList.push(o);
             o = new Object();
             o.data = data[i][key];
@@ -97,16 +104,16 @@ function timestampToStr(timestamp) {
     return date;
 }
 
-function textHtml(id,name,width){
+function textHtml(id,name,width,value){
     width=width?width:200;
     var html='<div class="form-group">'+
         '<label for="name" class="fl modelLabel">'+name+'</label>'+
-        '<input type="text" class="form-control fl" id="'+id+'" placeholder="请输入'+name+'" style="width:'+width+'">'+
+        '<input type="text" class="form-control fl" id="'+id+'" placeholder="请输入'+name+'" style="width:'+width+'" value="'+value+'">'+
         '</div>';
     return html;
 }
 
-function selectHtml(id,name,width){
+function selectHtml(id,name,width,value){
     width=width?width:200;
     var html= '<div class="form-group">'+
         '<label for="name" class="fl modelLabel">'+name+'</label>'+
@@ -137,4 +144,51 @@ function openAlert(msg,type){
             align: "center"
         }
     });
+}
+
+function selectAll(){
+    if($('#selectAll').is(':checked')){
+        $("[name='tableSelect']").attr("checked",true);//全选
+    }else{
+        $("[name='tableSelect']").attr("checked",false);//全不选
+    }
+}
+String.prototype.endWith=function(s){
+    if(s==null||s==""||this.length==0||s.length>this.length)
+        return false;
+    if(this.substring(this.length-s.length)==s)
+        return true;
+    else
+        return false;
+    return true;
+}
+
+String.prototype.startWith=function(s){
+    if(s==null||s==""||this.length==0||s.length>this.length)
+        return false;
+    if(this.substr(0,s.length)==s)
+        return true;
+    else
+        return false;
+    return true;
+}
+
+function commonIsEmpty(obj){
+    if(typeof obj == "undefined" || obj == null || obj == ""){
+        return true;
+    }else{
+        return false;
+    }
+}
+function getTableHead(){
+    return '<table>';
+}
+function getTableFoot(){
+    return '</table>';
+}
+function addTrTdHead(){
+    return '<tr><td>';
+}
+function addTrTdFoot(){
+    return '</td></tr>';
 }
